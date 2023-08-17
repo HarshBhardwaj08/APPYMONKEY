@@ -26,16 +26,10 @@ public class ENEMY_SCRIPTS : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Destroy the object and the bullet
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            Debug.Log("Hero");
             
         }
     }
-    private void OnDestroy()
-    {
-        if (mange_score != null)
-        {
-            mange_score.IncreaseScore(score);
-        }
-    }
+   
+    
 }

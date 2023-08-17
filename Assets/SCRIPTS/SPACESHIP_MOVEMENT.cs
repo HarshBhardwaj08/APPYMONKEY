@@ -70,10 +70,13 @@ public class SPACESHIP_MOVEMENT : MonoBehaviour
     }
      void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
+      
+        if (collision.gameObject.tag == "Enemy")
+        { 
             gameObject.SetActive(false); // Disable the player GameObject
+            collision.gameObject.SetActive(false);
         }
+        
     }
 
 }

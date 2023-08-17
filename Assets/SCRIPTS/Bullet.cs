@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float bullet_speed;
     float destroyTime = 7f;
     MANGE_SCORE scoreing;
+    int value = 10;
 
 
     void Start()
@@ -35,16 +36,15 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+   void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the bullet hit an object with the "Destroyable" tag
-        if (other.CompareTag("Enemy"))
+        if(collision.gameObject.tag == "Enemy")
         {
-            // Destroy the object and the bullet
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-           
-        }
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+            MANGE_SCORE.instance.IncreaseScore(value);
+         }
     }
+
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,29 +6,22 @@ using UnityEngine;
 public class ENEMY_SPAWNER : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public float spawnRate = 2f;
-    public Vector2 spawnArea;
+    public float spawnRate = 1f;
+    public bool isSpawn = true;
 
-    private float spawnTimer = 0f;
-
-    private void Update()
+    private void Start()
     {
-        spawnTimer += Time.deltaTime;
-
-        if (spawnTimer >= spawnRate)
-        {
-            SpawnEnemy();
-            spawnTimer = 0f;
-        }
+        StartCoroutine(spawner());
     }
 
-    private void SpawnEnemy()
+    IEnumerator spawner()
     {
-        Vector2 spawnPosition = new Vector2(
-            Random.Range(-spawnArea.x/2 , spawnArea.x/2 ),
-            Random.Range(-spawnArea.y/2, spawnArea.y/2)
-        );
+        WaitForSeconds wait = new WaitForSeconds(spawnRate);
 
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        while (isSpawn)
+        {
+            yield return wait;
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

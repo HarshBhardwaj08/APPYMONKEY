@@ -6,18 +6,28 @@ using TMPro;
 
 public class MANGE_SCORE : MonoBehaviour
 {
+    public static MANGE_SCORE instance;
     public TextMeshProUGUI Myscore;
     private int score = 0;
+     void Awake()
+    {
+        instance = this;
+    }
+     void Start()
+    {
+        Myscore.text =  "Score : " + score.ToString();
+    }
+    void Update()
+    {
+       
+       
+    }
 
     public void IncreaseScore(int points)
     {
         score += points;
-        UpdateScoreText();
-        Debug.Log(score);
+        Myscore.text = "Score : " + score.ToString();
     }
 
-    void UpdateScoreText()
-    {
-        Myscore.text = "Score: " + score;
-    }
+   
 }
